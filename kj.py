@@ -16,7 +16,7 @@ st.markdown("""
         top: 0;
         left: 0;
         width: 100%;  /* Prend toute la largeur */
-        height: 100%;  /* Prend toute la hauteur */
+        height: 50%;  /* Prend toute la hauteur */
         z-index: -1;  /* En arrière-plan (derrière tout le reste) */
     }
     
