@@ -112,9 +112,8 @@ elif page == "Destinations":
     imgs = images.get(destination, [])
     
     # Créer une boîte HTML avec les 3 images
-    # position: sticky top:0 pour que la boîte reste visible quand on scrolle
     html_images = f"""
-    <div style="background-color: rgba(255, 255, 255, 0.3); padding: 30px; border-radius: 10px; margin: 20px; display: flex; gap: 20px; position: sticky; top: 0;">
+    <div style="background-color: rgba(255, 255, 255, 0.3); padding: 30px; border-radius: 10px; margin: 20px; display: flex; gap: 20px;">
         <img src="{imgs[0]}" style="width: 32%; border-radius: 8px;">
         <img src="{imgs[1]}" style="width: 32%; border-radius: 8px;">
         <img src="{imgs[2]}" style="width: 32%; border-radius: 8px;">
