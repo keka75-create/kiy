@@ -10,14 +10,14 @@ st.markdown("""
         background-color: transparent !important;
     }
     
-    /* Positionner les images du slideshow en haut de la page */
+    /* Positionner les images du slideshow en arrière-plan */
     .slideshow {
-        position: relative;  /* Reste dans le flux normal de la page */
-        width: 100%;
-        height: 400px;
-        overflow: hidden;  /* Cache ce qui dépasse */
-        border-radius: 10px;
-        margin-bottom: 20px;
+        position: fixed;  /* Reste fixe quand on scroll */
+        top: 0;
+        left: 0;
+        width: 100%;  /* Prend toute la largeur */
+        height: 100%;  /* Prend toute la hauteur */
+        z-index: -1;  /* En arrière-plan (derrière tout le reste) */
     }
     
     /* Chaque image du slideshow */
@@ -34,7 +34,7 @@ st.markdown("""
     
     /* L'image "active" */
     .slideshow img.active {
-        opacity: 0.8; 
+        opacity: 0.5; 
     }
     </style>
     
@@ -57,7 +57,7 @@ components.html("""
             i = (i + 1) % imgs.length;  /* Passer à l'image suivante */
             imgs[i].classList.add('active');  /* Afficher la nouvelle image */
         }, 3000);  /* 3000 millisecondes = 3 secondes */
-    }, 1000);  /* Attendre 1 seconde que la page charge avant de démarrer */
+    }, 1000);
     </script>
 """, height=0)
 
@@ -111,16 +111,15 @@ elif page == "Destinations":
     # Récupérer les 3 images de la destination choisie
     imgs = images.get(destination, [])
     
-    # Créer une boîte HTML avec les 3 images côte à côte
-    # Le f devant permet d'insérer les URLs depuis la variable imgs
+    # Créer une boîte HTML avec les 3 images
+    # position: sticky top:0 pour que la boîte reste visible quand on scrolle
     html_images = f"""
-    <div style="padding: 20px; border-radius: 10px; margin: 20px 0; display: flex; gap: 20px;">
-        <img src="{imgs[0]}" style="width: 32%; border-radius: 8px; object-fit: cover; height: 200px;">
-        <img src="{imgs[1]}" style="width: 32%; border-radius: 8px; object-fit: cover; height: 200px;">
-        <img src="{imgs[2]}" style="width: 32%; border-radius: 8px; object-fit: cover; height: 200px;">
+    <div style="background-color: rgba(255, 255, 255, 0.3); padding: 30px; border-radius: 10px; margin: 20px; display: flex; gap: 20px; position: sticky; top: 0;">
+        <img src="{imgs[0]}" style="width: 32%; border-radius: 8px;">
+        <img src="{imgs[1]}" style="width: 32%; border-radius: 8px;">
+        <img src="{imgs[2]}" style="width: 32%; border-radius: 8px;">
     </div>
     """
     
-    # Afficher la boîte HTML dans Streamlit
-    # unsafe_allow_html=True permet d'afficher du vrai HTML
+    # Afficher la boîte HTML
     st.markdown(html_images, unsafe_allow_html=True)
